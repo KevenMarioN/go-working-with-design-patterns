@@ -19,7 +19,15 @@ func (app *application) routes() http.Handler {
 
 	mux.Get("/", app.Home)
 	mux.Get("/{page}", app.SelectPage)
-	mux.Get("/ping", app.Pong)
+	mux.Get("/test-patterns", app.TestPatterns)
+
+	mux.Route("/api", func(r chi.Router) {
+		r.Use(middleware.AllowContentType("Json"))
+		r.Get("/ping", app.Pong)
+		r.Post("/dog-factory", app.CreateCatFromFactory)
+		r.Post("/cat-factory", app.CreateDogFromFactory)
+		r.Post("/dog-cat-abstract-factory/{species}", app.CreateDogOrCatFromAbstractFactory)
+	})
 
 	return mux
 }
