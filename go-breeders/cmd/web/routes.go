@@ -24,9 +24,11 @@ func (app *application) routes() http.Handler {
 	mux.Route("/api", func(r chi.Router) {
 		r.Use(middleware.AllowContentType("Json"))
 		r.Get("/ping", app.Pong)
-		r.Post("/dog-factory", app.CreateCatFromFactory)
-		r.Post("/cat-factory", app.CreateDogFromFactory)
-		r.Post("/dog-cat-abstract-factory/{species}", app.CreateDogOrCatFromAbstractFactory)
+		r.Get("/dog-factory", app.CreateCatFromFactory)
+		r.Get("/cat-factory", app.CreateDogFromFactory)
+		r.Get("/dog-cat-abstract-factory/{species}", app.CreateDogOrCatFromAbstractFactory)
+		r.Get("/dog-breeds", app.GetAllDogBreedsJSON)
+		r.Get("/cat-breeds", app.GetAllCatBreedsJSON)
 	})
 
 	return mux

@@ -41,7 +41,27 @@ func (a *application) CreateDogOrCatFromAbstractFactory(w http.ResponseWriter, r
 		_ = tool.ErrorJSON(w, err, http.StatusBadRequest)
 		return
 	}
-	_ = tool.WriteJSON(w, http.StatusCreated, &pet)
+	_ = tool.WriteJSON(w, http.StatusCreated, pet)
+}
+
+func (a *application) GetAllDogBreedsJSON(w http.ResponseWriter, r *http.Request) {
+	var tool toolbox.Tools
+	dogBreeds, err := a.Models.DogBreed.All()
+	if err != nil {
+		_ = tool.ErrorJSON(w, err, http.StatusBadRequest)
+		return
+	}
+	_ = tool.WriteJSON(w, http.StatusCreated, dogBreeds)
+}
+
+func (a *application) GetAllCatBreedsJSON(w http.ResponseWriter, r *http.Request) {
+	var tool toolbox.Tools
+	dogBreeds, err := a.Models.CatBreed.All()
+	if err != nil {
+		_ = tool.ErrorJSON(w, err, http.StatusBadRequest)
+		return
+	}
+	_ = tool.WriteJSON(w, http.StatusCreated, dogBreeds)
 }
 
 func (a *application) TestPatterns(w http.ResponseWriter, r *http.Request) {

@@ -1,13 +1,39 @@
 package models
 
-import "time"
+import (
+	"database/sql"
+	"time"
+)
+
+var db *sql.DB
+
+type Models struct {
+	DogBreed DogBreed
+	CatBreed CatBreed
+}
+
+func New(conn *sql.DB) *Models {
+	db = conn
+
+	return &Models{
+		DogBreed: DogBreed{},
+	}
+}
 
 type DogBreed struct {
 	Breed
 }
 
+func (d *DogBreed) All() ([]*DogBreed, error) {
+	return d.allDogBreeds()
+}
+
 type CatBreed struct {
 	Breed
+}
+
+func (d *CatBreed) All() ([]*CatBreed, error) {
+	return d.allCatBreeds()
 }
 
 type Breed struct {

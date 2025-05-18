@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function (){
 	})
 
 	dogAbstractBtn.addEventListener("click", function (){
-		fetch("api/dog-cat-abstract-factory/dog", {method: 'post'})
+		fetch("api/dog-cat-abstract-factory/dog", {method: 'GET'})
 		.then((response) => response.json())
 		.then((data) => {
 			if (data.error){
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function (){
 	})
 
 	catAbstractBtn.addEventListener("click", function (){
-		fetch("api/dog-cat-abstract-factory/cat", {method: 'post'})
+		fetch("api/dog-cat-abstract-factory/cat", {method: 'GET'})
 		.then((response) => response.json())
 		.then((data) => {
 			if (data.error){
